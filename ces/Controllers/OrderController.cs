@@ -37,7 +37,7 @@ namespace ces.Controllers
             }
         }
 
-        [HttpDelete("DeleteUser/{Id}")]
+        [HttpDelete("DeleteOrder/{Id}")]
         public async Task<HttpStatusCode> DeleteOrder(Guid id)
         {
              _orderService.DeleteOrder(id);
