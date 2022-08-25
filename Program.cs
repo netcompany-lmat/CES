@@ -1,4 +1,9 @@
 using ces.ORM;
+using ces.Repositories;
+using ces.Repositories.Impl;
+using ces.Services;
+using ces.Services.Impl;
+using Microsoft.DotNet.Scaffolding.Shared.ProjectModel;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 using System.Configuration;
@@ -12,6 +17,15 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 
 builder.Services.AddControllers();
+
+//Services 
+
+builder.Services.AddScoped<IOrderService, OrderService>();
+
+
+//Repostiories 
+builder.Services.AddScoped<IOrderRepository, OrderRepository>();
+
 
 var app = builder.Build();
 
