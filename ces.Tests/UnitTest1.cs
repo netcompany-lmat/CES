@@ -1,4 +1,4 @@
-namespace TestProject1
+namespace ces.Tests
 {
     [TestClass]
     public class UnitTest1
