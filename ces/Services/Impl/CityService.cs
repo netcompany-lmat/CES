@@ -11,9 +11,15 @@ namespace ces.Services.Impl
         {
             _cityRepository = cityRepository;
         }
+
         public async Task<List<City>> GetCities()
         {
             return await _cityRepository.GetCities();
+        }
+
+        public City GetCity(string city)
+        {
+            return _cityRepository.GetCities().Result.SingleOrDefault(q => q.Name == city);
         }
     }
 }
