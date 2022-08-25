@@ -21,7 +21,6 @@ public class RouteController : ControllerBase
         _cityService = cityService;
     }
 
-    // For mock-up purposes
     [HttpPost]
     [Route("get-routes")]
     public IEnumerable<GetRoutesResponse> GetRoutes(GetRoutesRequest request)
