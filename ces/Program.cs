@@ -21,11 +21,12 @@ builder.Services.AddControllers();
 
 //Services
 builder.Services.AddScoped<IOrderService, OrderService>();
-
+builder.Services.AddScoped<IRouteService, RouteService>();
 
 //Repostiories 
 // builder.Services.AddScoped<IOrderRepository, OrderRepository>();
 builder.Services.AddTransient<IOrderRepository, OrderRepository>();
+builder.Services.AddTransient<IRouteRepository, RouteRepository>();
 
 builder.Services.AddTransient<ApplicationDbContext, ApplicationDbContext>();
 
