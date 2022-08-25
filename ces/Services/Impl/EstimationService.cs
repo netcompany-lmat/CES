@@ -5,11 +5,19 @@ using System.Runtime.CompilerServices;
 using Route = ces.Models.Route;
 using Path = Dijkstra.Algorithm.Pathing.Path;
 using ces.DTO.Routes;
+using ces.Repositories.Impl;
 
 namespace ces.Services.Impl
 {
     public class EstimationService : IEstimationService
     {
+        private readonly CityRepository cityRepository;
+
+        public EstimationService(CityRepository cityRepository)
+        {
+            this.cityRepository = cityRepository;
+        }
+
         public List<Estimation> GetEstimations(string a, string b)
         {
             List<Estimation> estimations = new List<Estimation>();
@@ -52,7 +60,7 @@ namespace ces.Services.Impl
         private GraphBuilder GetCities(out List<City> cities)
         {
             var builder = new GraphBuilder();
-            cities = new List<City>(); // from db
+            cities = cityRepository.GetCities().Result;
             foreach (City city in cities)
             {
                 builder.AddNode(city.Name);
