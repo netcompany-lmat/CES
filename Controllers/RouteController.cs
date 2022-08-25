@@ -21,7 +21,6 @@ public class RouteController : ControllerBase
     [Route("get-routes")]
     public IEnumerable<GetRoutesResponse> GetRoutes(GetRoutesRequest request)
     {
-        new ApplicationDbContext();
         return RoutesMockup();
     }
 

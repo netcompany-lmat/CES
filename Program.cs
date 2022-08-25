@@ -35,6 +35,11 @@ app.MapFallbackToFile("index.html"); ;
 
 app.Run();
 
+using (ApplicationDbContext context = new ApplicationDbContext())
+{
+    context.Database.Migrate();
+}
+
 void ConfigureServices(IServiceCollection services)
 {
     services.AddDbContext<ApplicationDbContext>(options =>
