@@ -1,6 +1,9 @@
-﻿namespace ces.Services
+﻿using ces.Models;
+
+namespace ces.Services
 {
-    public class ICityService
+    public interface ICityService
     {
+        public Task<List<City>> GetCities();
     }
 }

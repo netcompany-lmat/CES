@@ -1,6 +1,9 @@
-﻿namespace ces.Repositories
+﻿using ces.Models;
+
+namespace ces.Repositories
 {
-    public class CityRepository
+    public interface ICityRepository
     {
+        public Task<List<City>> GetCities();
     }
 }

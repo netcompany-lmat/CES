@@ -1,4 +1,8 @@
 using ces.ORM;
+using ces.Repositories;
+using ces.Repositories.Impl;
+using ces.Services;
+using ces.Services.Impl;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 using System.Configuration;
@@ -10,8 +14,11 @@ var configuration = new ConfigurationBuilder()
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-
+builder.Services.AddScoped<ICityService, CityService>();
 builder.Services.AddControllers();
+
+// Add repository 
+builder.Services.AddTransient<ICityRepository, CityRepository>();
 
 var app = builder.Build();
 
