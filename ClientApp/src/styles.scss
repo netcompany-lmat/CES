@@ -1,0 +1,58 @@
+/* You can add global styles to this file, and also import other style files */
+@import "src/_themes.scss";
+@import '~bootstrap/scss/bootstrap';
+
+/* Provide sufficient contrast against white background */
+* {
+  color: #F2789F;
+}
+
+body {
+  background-color: #F9C5D5;
+}
+
+.test-class {
+  background-color: red !important;
+  color: green !important;
+}
+
+.form-control {
+  background-color: transparent !important;
+  color: #F2789F !important;
+  border-color: #F999B7 !important;
+}
+
+.form-control:focus {
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset, 0 0 8px #F2789F;
+}
+
+a {
+  color: #0366d6;
+}
+
+code {
+  color: #e01a76;
+}
+
+.btn-primary {
+  color: #fff;
+  background-color: #1b6ec2;
+  border-color: #1861ac;
+}
+
+img.logo {
+  max-width: 100px;
+  max-height: 100px;
+}
+
+.override-form-control {
+  appearance: auto !important;
+}
+
+.btn-primary, .btn-primary:hover, .btn-primary:active, .btn-primary:visited {
+  background-color: #8064A2 !important;
+}
+
+.dropdown-item:active, .dropdown-item.active {
+  background: #FEE3EC;
+}
