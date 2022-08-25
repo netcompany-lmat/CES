@@ -6,8 +6,15 @@ namespace ces.Controllers;
 
 [ApiController]
 [Route("api/v0")]
-public class RouteController
+public class RouteController : ControllerBase
 {
+    private readonly ILogger<RouteController> _logger;
+
+    public RouteController(ILogger<RouteController> logger)
+    {
+        _logger = logger;
+    }
+
     // For mock-up purposes
     [HttpPost]
     [Route("get-routes")]
