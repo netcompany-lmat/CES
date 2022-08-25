@@ -1,0 +1,25 @@
+<div #collapse="ngbCollapse" [(ngbCollapse)]="isCollapsed">
+  <table class="table">
+    <thead>
+    <tr>
+      <th scope="col">Option</th>
+      <th scope="col">Price</th>
+      <th scope="col">Est. delivery time</th>
+      <th scope="col"></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let route of routes; index as i">
+      <td class="center-vertically">
+        {{ route.option }}
+        <span *ngIf = "route.option == telstarDealOption" >&#9733;</span>
+      </td>
+      <td class="center-vertically">${{ route.price }}</td>
+      <td class="center-vertically">{{minutesToString(route.time)}}</td>
+      <td class="center-vertically">
+        <button [ngClass]="route.option == telstarDealOption ? 'tlDealButton' : ''" class="btn btn-outline-primary form-control" ><b>ORDER</b></button>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</div>
