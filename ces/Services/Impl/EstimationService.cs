@@ -14,6 +14,8 @@ namespace ces.Services.Impl
         {
             List<Estimation> estimations = new List<Estimation>();
             estimations.Add(GetPromotedEstimation(a, b));
+            estimations.Add(GetCheapestEstimation(a, b));
+            estimations.Add(GetShortestEstimation(a, b));
             return estimations;
         }
 
@@ -22,10 +24,29 @@ namespace ces.Services.Impl
             var cities = new List<City>();
             var path = GetLocalMap(out cities, EstimationType.Promoted).Build().Dijkstra(a, b);
             var weight = path.Segments.Sum(s => s.Weight);
-            var count = path.Segments.Count();
+            var count = path.Segments.Count;
             var price = weight * 3;
             var time = weight * 60 + count * 15;
             return new Estimation() { Cost = price, Time = time, Type = EstimationType.Promoted };
+        }
+
+        private Estimation GetCheapestEstimation(string a, string b)
+        {
+            var cities = new List<City>();
+            var path = GetMap(EstimationType.Cheapest).Build().Dijkstra(a, b);
+            var price = path.Segments.Sum(s => s.Weight);
+            return new Estimation() { Cost = price, Time = 0, Type = EstimationType.Cheapest };
+        }
+
+        private Estimation GetShortestEstimation(string a, string b)
+        {
+            var cities = new List<City>();
+            var path = GetMap(EstimationType.Shortest).Build().Dijkstra(a, b);
+            var time = path.Segments.Sum(s => s.Weight);
+            var count = path.Segments.Count;
+            time += count * 15;
+
+            return new Estimation() { Cost = 0, Time = time, Type = EstimationType.Cheapest };
         }
 
         private GraphBuilder GetCities(out List<City> cities)
@@ -63,7 +84,7 @@ namespace ces.Services.Impl
             return builder;
         }
 
-        private GraphBuilder GetMapPrice(EstimationType type)
+        private GraphBuilder GetMap(EstimationType type)
         {
             var cities = new List<City>();
             var builder = GetLocalMap(out cities, type);
