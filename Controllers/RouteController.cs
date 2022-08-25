@@ -1,4 +1,5 @@
 ﻿using ces.DTO.Routes;
+using ces.ORM;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections;
 
@@ -20,6 +21,7 @@ public class RouteController : ControllerBase
     [Route("get-routes")]
     public IEnumerable<GetRoutesResponse> GetRoutes(GetRoutesRequest request)
     {
+        new ApplicationDbContext();
         return RoutesMockup();
     }
 
