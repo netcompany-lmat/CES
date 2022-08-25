@@ -1,3 +1,12 @@
+using ces.ORM;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.OpenApi.Models;
+using System.Configuration;
+
+var configuration = new ConfigurationBuilder()
+    .AddJsonFile("appsetings.json", true, true)
+    .Build();
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -25,3 +34,24 @@ app.MapControllerRoute(
 app.MapFallbackToFile("index.html"); ;
 
 app.Run();
+
+void ConfigureServices(IServiceCollection services)
+{
+    services.AddDbContext<ApplicationDbContext>(options =>
+        options.UseSqlServer(
+            configuration.GetConnectionString("DefaultConnection"),
+            b => b.MigrationsAssembly(typeof(ApplicationDbContext).Assembly.FullName)));
+    #region Swagger
+    services.AddSwaggerGen(c =>
+    {
+        c.IncludeXmlComments(string.Format(@"{0}\EFCore.CodeFirst.WebApi.xml", System.AppDomain.CurrentDomain.BaseDirectory));
+        c.SwaggerDoc("v1", new OpenApiInfo
+        {
+            Version = "v1",
+            Title = "EFCore.CodeFirst.WebApi",
+        });
+    });
+    services.AddDbContext<ApplicationDbContext>();
+    #endregion
+    services.AddControllers();
+}
