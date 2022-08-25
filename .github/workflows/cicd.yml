@@ -17,12 +17,15 @@
 # For more information on the Azure Web Apps Deploy action: https://github.com/Azure/webapps-deploy
 # For more samples to get started with GitHub Action workflows to deploy to Azure: https://github.com/Azure/actions-workflow-samples
 
-name: CI CD
+name: CICD
 
 env:
   AZURE_WEBAPP_NAME: TELSTAR    # set this to the name of your Azure Web App
   AZURE_WEBAPP_PACKAGE_PATH: '.'      # set this to the path to your web app project, defaults to the repository root
   DOTNET_VERSION: '6.0.x'                 # set this to the .NET Core version to use
+
+on:
+  workflow_dispatch:
 
 permissions:
   contents: read
