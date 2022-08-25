@@ -37,12 +37,12 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - name: Set up .NET Core
+      - name: dotnet setup
         uses: actions/setup-dotnet@v2
         with:
           dotnet-version: ${{ env.DOTNET_VERSION }}
       
-      - name: Set up dependency caching for faster builds
+      - name: caching dependencies
         uses: actions/cache@v3
         with:
           path: ~/.nuget/packages
@@ -50,16 +50,16 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-nuget-
 
-      - name: Build with dotnet
+      - name: dotnet build
         run: dotnet build --configuration Release
 
       - name: dotnet publish
         run: dotnet publish -c Release -o ${{env.DOTNET_ROOT}}/myapp
 
-      - name: Upload artifact for deployment job
+      - name: upload artifact
         uses: actions/upload-artifact@v3
         with:
-          name: .net-app
+          name: telstar
           path: ${{env.DOTNET_ROOT}}/myapp
 
   deploy:
@@ -70,19 +70,12 @@ jobs:
     environment: PROD
 
     steps:
-      - name: Download artifact from build job
+      - name: download artifact
         uses: actions/download-artifact@v3
         with:
-          name: .net-app
+          name: telstar
 
-      - name: Update DefaultConnection string in appsettings.json
-        uses: jossef/action-set-json-field@v2
-        with:
-          file: appsettings.json
-          field: ConnectionStrings.DefaultConnection
-          value: ${{ secrets.AZURE_WEBAPP_DATABASE }}
-
-      - name: Deploy to Azure Web App
+      - name: deploy to azure
         id: deploy-to-webapp
         uses: azure/webapps-deploy@v2
         with:
