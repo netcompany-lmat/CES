@@ -1,0 +1,13 @@
+.main-view {
+  padding-top: 10vh;
+}
+
+#main-city-flex {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+app-city-textbox + app-city-textbox {
+  margin-left: 10%;
+}
