@@ -8,7 +8,7 @@ import { City } from 'src/app/interfaces/city';
 @Component({
   selector: 'app-city-textbox',
   templateUrl: './city-textbox.component.html',
-  styles: [`.form-control { width: 300px; }`]
+  styles: [`.form-control { background-color: unset !important; width: 300px; }`]
 })
 export class CityTextBox {
   @Input() displayText: string = "Choose city:";

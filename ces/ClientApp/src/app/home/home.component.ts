@@ -15,4 +15,11 @@ export class HomeComponent {
 
   fromText = "From:";
   toText = "To:";
+
+  selectedRoutesCollapsed = true;
+
+  estimateClicked(): void {
+    this.selectedRoutesCollapsed = !this.selectedRoutesCollapsed;
+    console.log('CLICKED', this.selectedRoutesCollapsed);
+  }
 }

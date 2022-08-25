@@ -2,7 +2,6 @@
 
 public class Route : BaseModel
 {
-    public Guid A { get; set; }
-    public Guid B { get; set; }
     public int Distance { get; set; }
+    public List<City> Cities { get; set; }
 }

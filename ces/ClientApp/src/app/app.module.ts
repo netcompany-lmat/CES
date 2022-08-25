@@ -12,6 +12,8 @@ import { CityTextBox } from './components/city-textbox/city-textbox.component'
 import { FetchDataComponent } from '../exampleFiles/fetch-data/fetch-data.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { Dropdown } from './components/dropdown/dropdown.component';
+import { CommonModule } from '@angular/common';
+import { RoutesTable } from './components/routes-table/routes-table.component';
 
 @NgModule({
   declarations: [
@@ -21,13 +23,15 @@ import { Dropdown } from './components/dropdown/dropdown.component';
     CounterComponent,
     FetchDataComponent,
     CityTextBox,
-    Dropdown
+    Dropdown,
+    RoutesTable
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
     HttpClientModule,
     FormsModule,
     NgbModule,
+    CommonModule,
     RouterModule.forRoot([
       { path: '', component: HomeComponent, pathMatch: 'full' },
       { path: 'counter', component: CounterComponent },

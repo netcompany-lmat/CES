@@ -17,27 +17,20 @@ body {
 }
 
 .form-control {
-  background-color: transparent !important;
   color: #F2789F !important;
   border-color: #F999B7 !important;
+}
+
+.transparent-bg {
+  background-color: transparent !important;
 }
 
 .form-control:focus {
   box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset, 0 0 8px #F2789F;
 }
 
-a {
-  color: #0366d6;
-}
-
 code {
   color: #e01a76;
-}
-
-.btn-primary {
-  color: #fff;
-  background-color: #1b6ec2;
-  border-color: #1861ac;
 }
 
 img.logo {
@@ -49,10 +42,14 @@ img.logo {
   appearance: auto !important;
 }
 
-.btn-primary, .btn-primary:hover, .btn-primary:active, .btn-primary:visited {
-  background-color: #8064A2 !important;
-}
-
 .dropdown-item:active, .dropdown-item.active {
   background: #FEE3EC;
+}
+
+.center-vertically {
+  vertical-align: middle;
+}
+
+.tlDealButton:not(:hover) {
+  background-color: #FFF !important;
 }

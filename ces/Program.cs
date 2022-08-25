@@ -3,8 +3,10 @@ using ces.Repositories;
 using ces.Repositories.Impl;
 using ces.Services;
 using ces.Services.Impl;
+using Microsoft.DotNet.Scaffolding.Shared.ProjectModel;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
+using NuGet.Protocol.Core.Types;
 using System.Configuration;
 
 var configuration = new ConfigurationBuilder()
@@ -19,6 +21,17 @@ builder.Services.AddControllers();
 
 // Add repository 
 builder.Services.AddTransient<ICityRepository, CityRepository>();
+
+//Services
+builder.Services.AddScoped<IOrderService, OrderService>();
+builder.Services.AddScoped<IRouteService, RouteService>();
+
+//Repostiories 
+// builder.Services.AddScoped<IOrderRepository, OrderRepository>();
+builder.Services.AddTransient<IOrderRepository, OrderRepository>();
+builder.Services.AddTransient<IRouteRepository, RouteRepository>();
+
+builder.Services.AddTransient<ApplicationDbContext, ApplicationDbContext>();
 
 var app = builder.Build();
 
