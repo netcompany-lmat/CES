@@ -19,25 +19,25 @@
     <div>
       Weight (kg):
       <br>
-      <input class="form-control" type="number">
+      <input class="form-control transparent-bg" type="number">
     </div>
 
     <div>
       Width (cm):
       <br>
-      <input class="form-control" type="number">
+      <input class="form-control transparent-bg" type="number">
     </div>
 
     <div>
       Height (cm):
       <br>
-      <input class="form-control" type="number">
+      <input class="form-control transparent-bg" type="number">
     </div>
 
     <div>
       Depth (cm):
       <br>
-      <input class="form-control" type="number">
+      <input class="form-control transparent-bg" type="number">
     </div>
 
     <div>
@@ -48,6 +48,13 @@
 
   </div>
   <div class="main-view-row">
-    <button style="margin-top: 20px;" class="btn btn-outline-primary"><b>Estimate!</b></button>
+    <button style="margin-top: 20px;" class="btn btn-outline-primary" (click)="estimateClicked()"><b>Estimate!</b></button>
+  </div>
+
+  <div style="padding-top: 20px;">
+    <app-routes-table
+      [isCollapsed]="selectedRoutesCollapsed"
+    >
+    </app-routes-table>
   </div>
 </div>
