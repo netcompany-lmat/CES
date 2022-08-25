@@ -41,3 +41,4 @@ public partial class ApplicationDbContext : DbContext
 
     partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
 }
+
