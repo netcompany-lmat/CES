@@ -75,6 +75,13 @@ jobs:
         with:
           name: .net-app
 
+      - name: Update DefaultConnection string in appsettings.json
+        uses: jossef/action-set-json-field@v2
+        with:
+          file: appsettings.json
+          field: ConnectionStrings.DefaultConnection
+          value: ${{ secrets.AZURE_WEBAPP_DATABASE }}
+
       - name: Deploy to Azure Web App
         id: deploy-to-webapp
         uses: azure/webapps-deploy@v2
