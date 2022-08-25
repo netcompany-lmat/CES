@@ -1,4 +1,4 @@
-<div style="display: inline-block;">
+<div>
   <label i18n for="typeahead-prevent-manual-entry">{{displayText}}</label>
   <div class="col">
     <input id="typeahead-prevent-manual-entry" type="text" class="form-control"
@@ -6,7 +6,9 @@
       [ngbTypeahead]="search"
       [inputFormatter]="formatter"
       [resultFormatter]="formatter"
-      [editable]='false' />
+      [editable]='false'
+      highlightClass="test-class"
+    />
   </div>
   <pre>Model: {{ model | json }}</pre>
 </div>

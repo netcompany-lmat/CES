@@ -4,9 +4,19 @@ a.navbar-brand {
   word-break: break-all;
 }
 
+nav {
+  background-color: #F2789F !important;
+  border: unset !important;
+}
+
+nav  * {
+  color: #FEE3EC !important;
+}
+
 html {
   font-size: 14px;
 }
+
 @media (min-width: 768px) {
   html {
     font-size: 16px;

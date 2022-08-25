@@ -11,6 +11,7 @@ import { CounterComponent } from '../exampleFiles/counter/counter.component';
 import { CityTextBox } from './components/city-textbox/city-textbox.component'
 import { FetchDataComponent } from '../exampleFiles/fetch-data/fetch-data.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { Dropdown } from './components/dropdown/dropdown.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     HomeComponent,
     CounterComponent,
     FetchDataComponent,
-    CityTextBox
+    CityTextBox,
+    Dropdown
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
