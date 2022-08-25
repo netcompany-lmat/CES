@@ -1,19 +1,40 @@
 ﻿using ces.Models;
 using Microsoft.EntityFrameworkCore;
+using Route = ces.Models.Route;
 
 namespace ces.ORM;
 
-public class ApplicationDbContext : DbContext
+public partial class ApplicationDbContext : DbContext
 {
-    public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
+    public DbSet<City> Cities { get; set; }
+    public DbSet<Customer> Customers { get; set;}
+    public DbSet<Order> Orders { get; set; }
+    public DbSet<ParcelType> ParcelTypes { get; set; }
+    public DbSet<Route> Routes { get; set; }
+
+    public ApplicationDbContext()
+    {
+
+    }
+
+    public ApplicationDbContext(DbContextOptions options)
             : base(options)
     {
     }
 
-    public DbSet<City> Cities { get; set; }
-
-    public async Task<int> SaveChanges()
+    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
-        return await base.SaveChangesAsync();
+        if (!optionsBuilder.IsConfigured)
+        {
+#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
+            optionsBuilder.UseSqlServer("Server=127.0.0.1;Database=TelstarLogisticsDatabase;User ID=sa;Password=Netcompany-123;Trusted_Connection=False;");
+        }
     }
+
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+        OnModelCreatingPartial(modelBuilder);
+    }
+
+    partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
 }
