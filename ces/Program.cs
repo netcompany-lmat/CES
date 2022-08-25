@@ -6,6 +6,7 @@ using ces.Services.Impl;
 using Microsoft.DotNet.Scaffolding.Shared.ProjectModel;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
+using NuGet.Protocol.Core.Types;
 using System.Configuration;
 
 var configuration = new ConfigurationBuilder()
@@ -18,14 +19,15 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
 
-//Services 
-
+//Services
 builder.Services.AddScoped<IOrderService, OrderService>();
 
 
 //Repostiories 
-builder.Services.AddScoped<IOrderRepository, OrderRepository>();
+// builder.Services.AddScoped<IOrderRepository, OrderRepository>();
+builder.Services.AddTransient<IOrderRepository, OrderRepository>();
 
+builder.Services.AddTransient<ApplicationDbContext, ApplicationDbContext>();
 
 var app = builder.Build();
 

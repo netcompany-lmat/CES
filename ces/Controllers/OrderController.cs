@@ -56,7 +56,7 @@ namespace ces.Controllers
         [HttpPost("InsertOrder")]
         public async Task<HttpStatusCode> InsertOrder(Order order)
         {
-            _orderService.UpdateOrder(order);
+            await _orderService.InsertOrder(order);
             return HttpStatusCode.Created;
         }
 
