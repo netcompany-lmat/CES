@@ -4,5 +4,5 @@ namespace ces.Clients.EIT;
 
 public interface IEastIndiaClient
 {
-    Task<string> GetRoutesAsync(GetRoutesRequest request);
+    Task<List<GetRoutesResponse>> GetRoutesAsync(GetRoutesRequest request);
 }

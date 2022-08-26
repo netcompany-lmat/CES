@@ -4,5 +4,5 @@ namespace ces.Clients.Oceanic;
 
 public interface IOceanicClient
 {
-    Task<string> GetRoutesAsync(GetRoutesRequest request);
+    Task<List<GetRoutesResponse>> GetRoutesAsync(GetRoutesRequest request);
 }
