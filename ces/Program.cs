@@ -16,16 +16,20 @@ var configuration = new ConfigurationBuilder()
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-
+builder.Services.AddScoped<ICityService, CityService>();
 builder.Services.AddControllers();
+
+// Add repository 
+builder.Services.AddTransient<ICityRepository, CityRepository>();
 
 //Services
 builder.Services.AddScoped<IOrderService, OrderService>();
-
+builder.Services.AddScoped<IRouteService, RouteService>();
 
 //Repostiories 
 // builder.Services.AddScoped<IOrderRepository, OrderRepository>();
 builder.Services.AddTransient<IOrderRepository, OrderRepository>();
+builder.Services.AddTransient<IRouteRepository, RouteRepository>();
 
 builder.Services.AddTransient<ApplicationDbContext, ApplicationDbContext>();
 
