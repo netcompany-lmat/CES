@@ -8,35 +8,37 @@ namespace ces_test
 {
     public class OrderTests
     {
+        Mock<ILogger<OrderController>> loggerMock;
+        Mock<IOrderService>? orderServiceMock;
         [SetUp]
         public void Setup()
         {
-
+            loggerMock = new Mock<ILogger<OrderController>>();
+            orderServiceMock = new Mock<IOrderService>();
         }
 
         [Test]
         public async Task ReturnsOrderByOrderId()
         {
-            //var logger = new Mock<ILogger<OrderController>>();
-            //var orderStub = new Mock<IOrderService>(logger);
+            Guid validOrderId = new();
 
-            //Guid validOrderId = new();
+            Order order = new()
+            {
+                DateTime = DateTime.Now,
+                Price = 3.5                
+            };
 
-            //Order order = new()
-            //{
+            orderServiceMock.Setup(x => x.GetOrderById(validOrderId))
+                .ReturnsAsync(new Order()
+                {
+                    DateTime = DateTime.Now,
+                    Price = 3.5
+                });
 
-            //};
+            var orderController = new OrderController(loggerMock.Object, orderServiceMock.Object);
+            var response = await orderController.GetOrderById(validOrderId);
 
-            //orderStub.Setup(x => x.GetOrderById(validOrderId))
-            //    .ReturnsAsync(new Order()
-            //    {
-                                       
-            //    });
-
-            //var orderController = new OrderController(logger.Object, orderStub.Object);
-            //var response = await orderController.GetOrderById(validOrderId);
-
-            //Assert.AreSame("","");            
+            Assert.AreEqual(order.Price, response.Value.Price);
         }
     }
 }
