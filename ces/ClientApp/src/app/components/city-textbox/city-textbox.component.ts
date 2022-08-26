@@ -14,7 +14,15 @@ export class CityTextBox {
   @Input() displayText: string = "Choose city:";
   @Input() allCities: City[] = [];
 
-  @Input() model?: City;
+  private _model?: City;
+  @Input() get model(): City | undefined {
+      return this._model;
+  }
+  set model(value: City | undefined) {
+      this.modelChange.emit(value);
+      this._model = value;
+  }
+
   @Output() modelChange = new EventEmitter<City>();
 
   formatter = (city: City) => city.name;

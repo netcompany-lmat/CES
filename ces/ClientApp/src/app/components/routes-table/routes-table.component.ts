@@ -1,4 +1,5 @@
 import {Component, Input} from '@angular/core';
+import { EstimateRoutesResponse } from 'src/app/services/estimate-routes/estimate-routes.response';
 
 @Component({
   selector: 'app-routes-table',
@@ -6,26 +7,9 @@ import {Component, Input} from '@angular/core';
 })
 export class RoutesTable {
   @Input() isCollapsed = true;
+  @Input() routes: EstimateRoutesResponse = {routes: []};
 
   public readonly telstarDealOption = 'Telstar Logistics Deal';
-
-  routes = [
-    {
-      option: this.telstarDealOption,
-      price: 250,
-      time: 42069
-    },
-    {
-      option: 'Speed',
-      price: 399.99,
-      time: 300
-    },
-    {
-      option: 'Economy',
-      price: 300,
-      time: 3600
-    },
-  ];
 
   minutesToString(minutes: number) {
     // calculate (and subtract) whole days

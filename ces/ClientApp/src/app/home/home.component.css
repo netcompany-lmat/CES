@@ -16,3 +16,17 @@
 * ~ .main-view-row > * {
   padding-right: 5%;
 }
+
+.logo-bg {
+  background-image: url('/assets/extra_logo.png');
+  background-repeat: no-repeat;
+  background-position: 50%;
+  background-size: 30%;
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  bottom: 0px;
+  left: 0px;
+  opacity: 0.03;
+  pointer-events: none;
+}
