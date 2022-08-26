@@ -24,6 +24,7 @@ builder.Services.AddControllers();
 // Add services
 builder.Services.AddScoped<IOrderService, OrderService>();
 builder.Services.AddScoped<IRouteService, RouteService>();
+builder.Services.AddScoped<ICityService, CityService>();
 
 // Add clients
 builder.Services.AddScoped<IEastIndiaClient, EastIndiaClient>();
@@ -32,6 +33,7 @@ builder.Services.AddScoped<IOceanicClient, OceanicClient>();
 // Add repositories 
 builder.Services.AddTransient<IOrderRepository, OrderRepository>();
 builder.Services.AddTransient<IRouteRepository, RouteRepository>();
+builder.Services.AddTransient<ICityRepository, CityRepository>();
 
 // Add DbContext
 builder.Services.AddTransient<ApplicationDbContext, ApplicationDbContext>();

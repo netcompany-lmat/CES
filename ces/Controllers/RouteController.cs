@@ -3,6 +3,8 @@ using ces.Clients.EIT;
 using ces.Clients.Oceanic;
 using ces.DTO.Routes;
 using ces.ORM;
+using ces.Repositories.Impl;
+using ces.Services.Impl;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections;
 using System.Net;
@@ -14,22 +16,23 @@ namespace ces.Controllers;
 public class RouteController : ControllerBase
 {
     private readonly ILogger<RouteController> _logger;
+    private readonly CityService _cityService;
     private readonly IEastIndiaClient _eastIndiaclient;
     private readonly IOceanicClient _oceanicClient;
 
-    public RouteController(ILogger<RouteController> logger, IEastIndiaClient eastIndiaClient, IOceanicClient oceanicClient)
+    public RouteController(ILogger<RouteController> logger, IEastIndiaClient eastIndiaClient, IOceanicClient oceanicClient, CityService cityService)
     {
         _logger = logger;
         _eastIndiaclient = eastIndiaClient;
         _oceanicClient = oceanicClient;
+        _cityService = cityService;
     }
 
-    // For mock-up purposes
     [HttpPost]
     [Route("get-routes")]
     public IEnumerable<GetRoutesResponse> GetRoutes(GetRoutesRequest request)
     {
-        return RoutesMockup();
+        return (IEnumerable<GetRoutesResponse>) _cityService.GetCity(request.StartCity).Routes;
     }
 
     [HttpPost]
