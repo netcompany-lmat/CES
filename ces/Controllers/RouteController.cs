@@ -1,4 +1,7 @@
-﻿using ces.DTO.Routes;
+﻿
+using ces.Clients.EIT;
+using ces.Clients.Oceanic;
+using ces.DTO.Routes;
 using ces.ORM;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections;
@@ -11,10 +14,14 @@ namespace ces.Controllers;
 public class RouteController : ControllerBase
 {
     private readonly ILogger<RouteController> _logger;
+    private readonly IEastIndiaClient _eastIndiaclient;
+    private readonly IOceanicClient _oceanicClient;
 
-    public RouteController(ILogger<RouteController> logger)
+    public RouteController(ILogger<RouteController> logger, IEastIndiaClient eastIndiaClient, IOceanicClient oceanicClient)
     {
         _logger = logger;
+        _eastIndiaclient = eastIndiaClient;
+        _oceanicClient = oceanicClient;
     }
 
     // For mock-up purposes
@@ -23,6 +30,20 @@ public class RouteController : ControllerBase
     public IEnumerable<GetRoutesResponse> GetRoutes(GetRoutesRequest request)
     {
         return RoutesMockup();
+    }
+
+    [HttpPost]
+    [Route("get-eit-routes")]
+    public async Task<string> GetEastIndiaRoutesAsync(GetRoutesRequest request)
+    {
+        return await _eastIndiaclient.GetRoutesAsync(request);
+    }
+
+    [HttpPost]
+    [Route("get-oceanic-routes")]
+    public async Task<string> GetOceanicRoutesAsync(GetRoutesRequest request)
+    {
+        return await _oceanicClient.GetRoutesAsync(request);
     }
 
     private IEnumerable<GetRoutesResponse> RoutesMockup()
