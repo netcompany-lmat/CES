@@ -17,8 +17,7 @@ var configuration = new ConfigurationBuilder()
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add controllers to the container.
-
+// Add controllers to the container
 builder.Services.AddControllers();
 
 // Add services
