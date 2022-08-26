@@ -9,7 +9,7 @@
     </tr>
     </thead>
     <tbody>
-    <tr *ngFor="let route of routes; index as i">
+    <tr *ngFor="let route of routes.routes; index as i">
       <td class="center-vertically">
         {{ route.option }}
         <span *ngIf = "route.option == telstarDealOption" >&#9733;</span>

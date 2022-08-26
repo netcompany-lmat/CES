@@ -1,4 +1,9 @@
 <div class="main-view">
+  <div style="display: relative;" class="logo-bg"></div>
+  <div class="main-view-row">
+    <h1>Select your trip:</h1>
+  </div>
+
   <div class="main-view-row">
     <app-city-textbox
         [(model)]="fromCity"
@@ -19,31 +24,31 @@
     <div>
       Weight (kg):
       <br>
-      <input class="form-control transparent-bg" type="number">
+      <input [(ngModel)]="weight" class="form-control transparent-bg" type="number">
     </div>
 
     <div>
       Width (cm):
       <br>
-      <input class="form-control transparent-bg" type="number">
+      <input [(ngModel)]="dimX" class="form-control transparent-bg" type="number">
     </div>
 
     <div>
       Height (cm):
       <br>
-      <input class="form-control transparent-bg" type="number">
+      <input [(ngModel)]="dimY" class="form-control transparent-bg" type="number">
     </div>
 
     <div>
       Depth (cm):
       <br>
-      <input class="form-control transparent-bg" type="number">
+      <input [(ngModel)]="dimZ" class="form-control transparent-bg" type="number">
     </div>
 
     <div>
       Choose package type:
       <br>
-      <app-dropdown></app-dropdown>
+      <app-dropdown (selectedItemEvent)="typeSelected($event)"></app-dropdown>
     </div>
 
   </div>
@@ -54,7 +59,10 @@
   <div style="padding-top: 20px;">
     <app-routes-table
       [isCollapsed]="selectedRoutesCollapsed"
+      [routes]="routes"
     >
     </app-routes-table>
   </div>
 </div>
+
+<ngbd-toast-global></ngbd-toast-global>
