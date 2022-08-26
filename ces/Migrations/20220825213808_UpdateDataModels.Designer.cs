@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ces.ORM;
 
@@ -11,9 +12,10 @@ using ces.ORM;
 namespace ces.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220825213808_UpdateDataModels")]
+    partial class UpdateDataModels
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -95,42 +97,46 @@ namespace ces.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<Guid>("A")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("B")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid?>("CityId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid?>("CityId1")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<int>("Distance")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
+                    b.HasIndex("CityId");
+
+                    b.HasIndex("CityId1");
+
                     b.ToTable("Routes");
                 });
 
-            modelBuilder.Entity("CityRoute", b =>
-                {
-                    b.Property<Guid>("CitiesId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid>("RoutesId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.HasKey("CitiesId", "RoutesId");
-
-                    b.HasIndex("RoutesId");
-
-                    b.ToTable("CityRoute");
-                });
-
-            modelBuilder.Entity("CityRoute", b =>
+            modelBuilder.Entity("ces.Models.Route", b =>
                 {
                     b.HasOne("ces.Models.City", null)
-                        .WithMany()
-                        .HasForeignKey("CitiesId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .WithMany("RoutesByA")
+                        .HasForeignKey("CityId");
 
-                    b.HasOne("ces.Models.Route", null)
-                        .WithMany()
-                        .HasForeignKey("RoutesId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                    b.HasOne("ces.Models.City", null)
+                        .WithMany("RoutesByB")
+                        .HasForeignKey("CityId1");
+                });
+
+            modelBuilder.Entity("ces.Models.City", b =>
+                {
+                    b.Navigation("RoutesByA");
+
+                    b.Navigation("RoutesByB");
                 });
 #pragma warning restore 612, 618
         }

@@ -1,7 +1,10 @@
 ﻿using ces.DTO.Routes;
 using ces.ORM;
+using ces.Repositories.Impl;
+using ces.Services.Impl;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections;
+using System.Net;
 
 namespace ces.Controllers;
 
@@ -10,18 +13,19 @@ namespace ces.Controllers;
 public class RouteController : ControllerBase
 {
     private readonly ILogger<RouteController> _logger;
+    private readonly CityService _cityService;
 
-    public RouteController(ILogger<RouteController> logger)
+    public RouteController(ILogger<RouteController> logger, CityService cityService)
     {
         _logger = logger;
+        _cityService = cityService;
     }
 
-    // For mock-up purposes
     [HttpPost]
     [Route("get-routes")]
     public IEnumerable<GetRoutesResponse> GetRoutes(GetRoutesRequest request)
     {
-        return RoutesMockup();
+        return (IEnumerable<GetRoutesResponse>) _cityService.GetCity(request.StartCity).Routes;
     }
 
     private IEnumerable<GetRoutesResponse> RoutesMockup()

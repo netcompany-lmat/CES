@@ -10,7 +10,6 @@ export class RoutesTable {
   @Input() routes: EstimateRoutesResponse = {routes: []};
 
   public readonly telstarDealOption = 'Telstar Logistics Deal';
-
   minutesToString(minutes: number) {
     // calculate (and subtract) whole days
     var days = Math.floor(minutes / 1440);
