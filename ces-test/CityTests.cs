@@ -19,12 +19,13 @@ namespace ces_test
         public void Setup()
         {
             loggerMock = new Mock<ILogger<CityController>>();
+            cityServiceMock = new Mock<ICityService>();
         }
 
         [Test]
         public async Task ReturnCities()
         {
-            cityServiceMock = new Mock<ICityService>();
+            
 
 
             List<City> cities = new()
