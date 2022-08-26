@@ -1,3 +1,5 @@
+using ces.Clients.EIT;
+using ces.Clients.Oceanic;
 using ces.ORM;
 using ces.Repositories;
 using ces.Repositories.Impl;
@@ -15,22 +17,24 @@ var configuration = new ConfigurationBuilder()
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
-builder.Services.AddScoped<ICityService, CityService>();
+// Add controllers to the container
 builder.Services.AddControllers();
 
-// Add repository 
-builder.Services.AddTransient<ICityRepository, CityRepository>();
-
-//Services
+// Add services
 builder.Services.AddScoped<IOrderService, OrderService>();
 builder.Services.AddScoped<IRouteService, RouteService>();
+builder.Services.AddScoped<ICityService, CityService>();
 
-//Repostiories 
-// builder.Services.AddScoped<IOrderRepository, OrderRepository>();
+// Add clients
+builder.Services.AddScoped<IEastIndiaClient, EastIndiaClient>();
+builder.Services.AddScoped<IOceanicClient, OceanicClient>();
+
+// Add repositories 
 builder.Services.AddTransient<IOrderRepository, OrderRepository>();
 builder.Services.AddTransient<IRouteRepository, RouteRepository>();
+builder.Services.AddTransient<ICityRepository, CityRepository>();
 
+// Add DbContext
 builder.Services.AddTransient<ApplicationDbContext, ApplicationDbContext>();
 
 var app = builder.Build();

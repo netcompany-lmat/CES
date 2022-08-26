@@ -6,16 +6,22 @@ using Route = ces.Models.Route;
 using Path = Dijkstra.Algorithm.Pathing.Path;
 using ces.DTO.Routes;
 using ces.Repositories.Impl;
+using ces.Clients.EIT;
+using ces.Clients.Oceanic;
 
 namespace ces.Services.Impl
 {
     public class EstimationService : IEstimationService
     {
         private readonly CityRepository cityRepository;
+        private readonly IEastIndiaClient _eastIndiaClient;
+        private readonly IOceanicClient _oceanicClient;
 
-        public EstimationService(CityRepository cityRepository)
+        public EstimationService(CityRepository cityRepository, IEastIndiaClient eitClient, IOceanicClient oceanicClient)
         {
             this.cityRepository = cityRepository;
+            _eastIndiaClient = eitClient;
+            _oceanicClient = oceanicClient;
         }
 
         public List<Estimation> GetEstimations(string a, string b)
@@ -99,30 +105,35 @@ namespace ces.Services.Impl
 
             foreach (City city in cities)
             {
-                var flights = new List<GetRoutesResponse>(); // integration
-                var swims = new List<GetRoutesResponse>(); // integration
+                var request = new GetRoutesRequest
+                {
+                    StartCity = city.Name
+                };
 
-                foreach (GetRoutesResponse flight in flights)
+                var flights = _eastIndiaClient.GetRoutesAsync(request);
+                var swims = _oceanicClient.GetRoutesAsync(request);
+
+                foreach (GetRoutesResponse flight in flights.Result)
                 {
                     if (type == EstimationType.Cheapest)
                     {
-                        builder.AddLink(city.Name, flight.DestCity, flight.Price);
+                        builder.AddLink(city.Name, flight.DestinationCity, flight.Price.Value);
                     }
                     else if (type == EstimationType.Shortest)
                     {
-                        builder.AddLink(city.Name, flight.DestCity, flight.Time);
+                        builder.AddLink(city.Name, flight.DestinationCity, flight.Time.Value);
                     }
                 }
 
-                foreach (GetRoutesResponse swim in swims)
+                foreach (GetRoutesResponse swim in swims.Result)
                 {
                     if (type == EstimationType.Cheapest)
                     {
-                        builder.AddLink(city.Name, swim.DestCity, swim.Price);
+                        builder.AddLink(city.Name, swim.DestinationCity, swim.Price.Value);
                     }
                     else if (type == EstimationType.Shortest)
                     {
-                        builder.AddLink(city.Name, swim.DestCity, swim.Time);
+                        builder.AddLink(city.Name, swim.DestinationCity, swim.Time.Value);
                     }
                 }                
             }
