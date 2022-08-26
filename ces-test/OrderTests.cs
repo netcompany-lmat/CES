@@ -17,26 +17,26 @@ namespace ces_test
         [Test]
         public async Task ReturnsOrderByOrderId()
         {
-            var logger = new Mock<ILogger<OrderController>>();
-            var orderStub = new Mock<IOrderService>(logger);
+            //var logger = new Mock<ILogger<OrderController>>();
+            //var orderStub = new Mock<IOrderService>(logger);
 
-            Guid validOrderId = new();
+            //Guid validOrderId = new();
 
-            Order order = new()
-            {
+            //Order order = new()
+            //{
 
-            };
+            //};
 
-            orderStub.Setup(x => x.GetOrderById(validOrderId))
-                .ReturnsAsync(new Order()
-                {
+            //orderStub.Setup(x => x.GetOrderById(validOrderId))
+            //    .ReturnsAsync(new Order()
+            //    {
                                        
-                });
+            //    });
 
-            var orderController = new OrderController(logger.Object, orderStub.Object);
-            var response = await orderController.GetOrderById(validOrderId);
+            //var orderController = new OrderController(logger.Object, orderStub.Object);
+            //var response = await orderController.GetOrderById(validOrderId);
 
-            Assert.AreSame("","");            
+            //Assert.AreSame("","");            
         }
     }
 }
